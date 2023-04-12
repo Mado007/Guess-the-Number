@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Guess the Number</title>
+</head>
+<body>
+    <h1>Guess the Number</h1>
+    <p>Welcome to Guess the Number! Guess a number between 1 and 100.</p>
+    <form>
+        <label for="guess">Guess:</label>
+        <input type="number" id="guess" name="guess">
+        <br><br>
+        <input type="button" value="Submit" onclick="checkGuess()">
+    </form>
+    <p id="message"></p>
+    <script>
+        var random_number = Math.floor(Math.random() * 100) + 1;
+        var num_guesses = 0;
+        
+        function checkGuess() {
+            var guess = document.getElementById("guess").value;
+            num_guesses++;
+            
+            if (guess < random_number) {
+                document.getElementById("message").innerHTML = "Too low! Guess higher.";
+            } else if (guess > random_number) {
+                document.getElementById("message").innerHTML = "Too high! Guess lower.";
+            } else {
+                document.getElementById("message").innerHTML = "Congratulations! You guessed the number in " + num_guesses + " guesses.";
+                var play_again = confirm("Do you want to play again?");
+                if (play_again) {
+                    random_number = Math.floor(Math.random() * 100) + 1;
+                    num_guesses = 0;
+                    document.getElementById("message").innerHTML = "";
+                    document.getElementById("guess").value = "";
+                } else {
+                    alert("Thanks for playing!");
+                    document.getElementById("guess").disabled = true;
+                    document.getElementsByTagName("input")[1].disabled = true;
+                }
+            }
+        }
+    </script>
+</body>
+</html>
